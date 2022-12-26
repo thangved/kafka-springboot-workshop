@@ -12,9 +12,11 @@ Follow the hints in the java files and make the unit tests run successful.
 
 After all your unit tests pass run the application connecting to our server.
 
-* Connect to our Kafka available during workshop: 
+* Connect to our Kafka available during workshop: kafka.agilino.app:29092
 
-* start kafka locally with docker
+You do *not* need to start your own kafka server, but if you want run it locally:
+
+* if you do not want to connect with our kafka server, start your own kafka locally with docker
 
 ```bash
 docker-compose up -d
