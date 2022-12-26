@@ -3,6 +3,7 @@ package vn.agilino.workshop.kafka.consumer;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.slf4j.Logger;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -30,11 +31,20 @@ public class FoodDeliveryConsumer {
         // TODO store received order in orders map
         // You can add basic validation of your food order before accepting it
         // You should also verify that the food is one of ALLOWED_FOODS.
+
+        if (!ALLOWED_FOODS.contains(foodOrderDTO.getFoodName())) {
+            return;
+        }
+
+        orders.put(foodOrderDTO.getId(), foodOrderDTO);
     }
 
     public FoodOrderDTO getOrder(int id) {
         // TODO: implement getting order from orders Map
         // You can implement a blocking solution to wait for the order to arrive.
-        return null;
+
+        FoodOrderDTO result = (FoodOrderDTO) orders.get(id);
+        orders.remove(id);
+        return result;
     }
 }
